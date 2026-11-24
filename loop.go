@@ -49,13 +49,10 @@ func runLoop(ctx context.Context, in io.Reader, out io.Writer, agent Agent) erro
 			continue
 		}
 
-		if err := handlePrompt(ctx, agent, prompt); err != nil {
+		resp, err := agent.HandlePrompt(ctx, prompt)
+		if err != nil {
 			return fmt.Errorf("handle prompt: %w", err)
 		}
+		fmt.Fprintln(out, resp)
 	}
-}
-
-func handlePrompt(ctx context.Context, agent Agent, prompt string) error {
-	//TODO retry 制御
-	return agent.HandlePrompt(ctx, prompt)
 }

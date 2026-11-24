@@ -13,9 +13,9 @@ type recordingAgent struct {
 	prompts []string
 }
 
-func (a *recordingAgent) HandlePrompt(ctx context.Context, prompt string) error {
+func (a *recordingAgent) HandlePrompt(ctx context.Context, prompt string) (string, error) {
 	a.prompts = append(a.prompts, prompt)
-	return nil
+	return "", nil
 }
 
 func TestRunLoop_PassesNonEmptyPromptsInOrderUntilEOF(t *testing.T) {
